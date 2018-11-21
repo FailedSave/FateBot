@@ -18,3 +18,4 @@ Can now choose how many max articles of clothing are possible when stripping
 ## 11/21/2018
 
 "Extended" and "Protracted" durations added
+More expressions and poses

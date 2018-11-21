@@ -81,6 +81,7 @@ export class FateDisplayComponent implements OnInit {
         "touching yourself intimately",
         "giving a friendly greeting",
         "with a gesture of triumph",
+        "with your hands held up in a gesture of surrender",
         "beckoning playfully"
     ]
 
@@ -93,6 +94,9 @@ export class FateDisplayComponent implements OnInit {
     "you barely feel yourself transforming, and your expression is neutral",
     "the transformation feels odd and surprising, leaving you with a confused expression",
     "the transformation washes over you in a cold, unexpected wave, leaving you with a terrified expression",
+    "the transformation feels deeply natural, and leaves you with an expression of tranquil acceptance",
+    "somehow, your mind wanders away during the transformation, and your expression seems lost in thought",
+    "the transformation feels better than you had anticipated as is progresses, leaving you with an expression of eager anticipation",
     "you aren't prepared for the strength of the change, and end up with a scared expression"
 
     ]
