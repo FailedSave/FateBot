@@ -97,6 +97,8 @@ export class FateDisplayComponent implements OnInit {
     "the transformation feels deeply natural, and leaves you with an expression of tranquil acceptance",
     "somehow, your mind wanders away during the transformation, and your expression seems lost in thought",
     "the transformation feels better than you had anticipated as is progresses, leaving you with an expression of eager anticipation",
+    "you feel defiant, but the transformation freezes your determined face before you can act",
+    "you try to protest, but are frozen just as you open your mouth to speak",
     "you aren't prepared for the strength of the change, and end up with a scared expression"
 
     ]
