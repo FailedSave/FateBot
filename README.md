@@ -4,7 +4,7 @@ ASFR Fate Bot for ASFR fans!
 
 # Changelog
 
-## 11/10/2018
+## 11/14/2018
 
 Initial iteration.
 
