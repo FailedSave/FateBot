@@ -1,0 +1,66 @@
+<p>Name: <input [(ngModel)]="name"></p>
+<p>Duration: <select [(ngModel)]="durationChoice">
+        <option>Short</option>
+        <option>Long</option>
+        <option>Extended</option>
+        <option>Protracted</option>
+        <option>Any</option>
+    </select></p>
+<p>Chance of Permanence: <select [(ngModel)]="permanenceChance">
+        <option>None</option>
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+        <option>Certain</option>
+    </select></p>
+<p>Chance of Stripping: <select [(ngModel)]="stripChance">
+        <option>None</option>
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+        <option>Certain</option>
+    </select>
+    Max Articles: <select [(ngModel)]="maxArticles">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+    </select></p>
+<p>Chance of Expression: <select [(ngModel)]="expressionChance">
+        <option>None</option>
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+        <option>Certain</option>
+    </select></p>
+<p>Chance of Pose: <select [(ngModel)]="poseChance">
+        <option>None</option>
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+        <option>Certain</option>
+    </select></p>
+<p><a class="button" (click)='getFate()'>Submit to Fate</a></p>
+<br />
+<br />
+<div *ngIf='showBanner'>
+    <p><strong>{{name}}</strong>, your fate is...</p>
+</div>
+<div [@fateState]="fateState">
+    <div *ngIf='stripped'>You will be stripped <strong>{{stripDescription}}</strong>...</div>
+    <p>You will be transformed into <strong>{{material}}</strong>...</p>
+    <div *ngIf='expression'>...{{expressionDescription}}...</div>
+    <div *ngIf='posed'>...you are posed {{poseDescription}}...</div>
+
+    <p>...you will stay that way <span *ngIf='permanent'><strong>permanently!</strong></span><span *ngIf='!permanent'>for
+            the next <strong>{{duration}}</strong>.</span></p>
+</div>
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+            by FailedSave; support, questions, or suggestions: FailedSave#3067
+        </p>
+    </div>
+</footer>
