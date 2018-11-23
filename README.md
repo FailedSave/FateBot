@@ -12,21 +12,25 @@ The custom choices list is added to the list of potential materials. It's likewi
 
 # Changelog
 
-## 11/14/2018
+## 11/22/2018
 
-Initial iteration
-
-## 11/20/2018
-
-Added expressions and poses
-Can now choose how many max articles of clothing are possible when stripping
+* Link to changelog in footer
+* Added blacklist and custom items
 
 ## 11/21/2018
 
-"Extended" and "Protracted" durations added
-More expressions and poses
+* "Extended" and "Protracted" durations added
+* More expressions and poses
 
-## 11/22/2018
+## 11/20/2018
 
-Link to changelog in footer
-Added blacklist and custom items
+* Added expressions and poses
+* Can now choose how many max articles of clothing are possible when stripping
+
+## 11/14/2018
+
+* Initial iteration
+
+
+
+
