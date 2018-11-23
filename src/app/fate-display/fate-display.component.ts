@@ -43,6 +43,8 @@ export class FateDisplayComponent implements OnInit {
     posed: boolean = false;
     maxArticles: string = "2";
     articles: number = 2;
+    blacklist: string = "";
+    custom: string = "";
 
 
 
@@ -57,7 +59,7 @@ export class FateDisplayComponent implements OnInit {
         "a small toy doll", "a copper statue", "a gleaming chrome statue", "a tree", "a wooden statue", "a ball-jointed toy doll",
         "a tiny ceramic figure", "a crystal statue", "an amethyst statue", "a glittering diamond statue", "a steel statue", "a life-sized porcelain figure",
         "a sapphire statue", "a ruby statue", "an emerald statue", "a marionette", "a life-sized plush toy", "a polished jade statue", "a small plush toy",
-        "a pearl statue", "a sand sculpture", "a life-sized cardboard standee"];
+        "a pearl statue", "a sand sculpture", "a life-sized cardboard standee", "a poster", "a playing card", "a realistic silicone sex doll", "an inflatable sex doll"];
 
     poseList = ["standing expectantly with your hands clasped",
         "kneeling submissively",
@@ -86,20 +88,20 @@ export class FateDisplayComponent implements OnInit {
     ]
 
     expressionList = ["the transformation is quick, and leaves you with a startled expression",
-    "the transformation hits hard and suddenly, leaving you with a stunned expression",
-    "the transformation feels blissful, leaving you in an expression of ecstasy",
-    "the transformation is slow and arousing, freezing you in a moment of unfulfilled lust",
-    "the transformation forces your face into a broad, friendly smile",
-    "you feel numb, and your expression is left entirely blank",
-    "you barely feel yourself transforming, and your expression is neutral",
-    "the transformation feels odd and surprising, leaving you with a confused expression",
-    "the transformation washes over you in a cold, unexpected wave, leaving you with a terrified expression",
-    "the transformation feels deeply natural, and leaves you with an expression of tranquil acceptance",
-    "somehow, your mind wanders away during the transformation, and your expression seems lost in thought",
-    "the transformation feels better than you had anticipated as is progresses, leaving you with an expression of eager anticipation",
-    "you feel defiant, but the transformation freezes your determined face before you can act",
-    "you try to protest, but are frozen just as you open your mouth to speak",
-    "you aren't prepared for the strength of the change, and end up with a scared expression"
+        "the transformation hits hard and suddenly, leaving you with a stunned expression",
+        "the transformation feels blissful, leaving you in an expression of ecstasy",
+        "the transformation is slow and arousing, freezing you in a moment of unfulfilled lust",
+        "the transformation forces your face into a broad, friendly smile",
+        "you feel numb, and your expression is left entirely blank",
+        "you barely feel yourself transforming, and your expression is neutral",
+        "the transformation feels odd and surprising, leaving you with a confused expression",
+        "the transformation washes over you in a cold, unexpected wave, leaving you with a terrified expression",
+        "the transformation feels deeply natural, and leaves you with an expression of tranquil acceptance",
+        "somehow, your mind wanders away during the transformation, and your expression seems lost in thought",
+        "the transformation feels better than you had anticipated as is progresses, leaving you with an expression of eager anticipation",
+        "you feel defiant, but the transformation freezes your determined face before you can act",
+        "you try to protest, but are frozen just as you open your mouth to speak",
+        "you aren't prepared for the strength of the change, and end up with a scared expression"
 
     ]
 
@@ -146,6 +148,17 @@ export class FateDisplayComponent implements OnInit {
         else {
             this.maxArticles = "2";
         }
+        if (this._storageService.retrieve("blacklist")) {
+            this.blacklist = this._storageService.retrieve("blacklist");
+        }
+        else {
+            this.blacklist = "";
+        } if (this._storageService.retrieve("custom")) {
+            this.custom = this._storageService.retrieve("custom");
+        }
+        else {
+            this.custom = "";
+        }
     }
 
     getFate() {
@@ -165,19 +178,48 @@ export class FateDisplayComponent implements OnInit {
         }
         this.poseDescription = this.poseList[Math.floor(Math.random() * this.poseList.length)];
         this.expressionDescription = this.expressionList[Math.floor(Math.random() * this.expressionList.length)];
-        this.material = this.materialsList[Math.floor(Math.random() * this.materialsList.length)];
+        var possibleMaterials: string[] = this.materialsList;
+        var allowableMaterials: string[] = [];
+        var blacklistItems: string[] = this.blacklist.split(";");
+        for (let material of possibleMaterials) {
+            var blacklisted: boolean = false;
+            for (let blacklistItem of blacklistItems) {
+                if (blacklistItem.length == 0) {
+                    break;
+                }
+                if (material.search(blacklistItem) >= 0) {
+                    blacklisted = true;
+                    break;
+                }
+            }
+            if (!blacklisted) {
+                allowableMaterials.push(material);
+            }
+        }
+
+        for (let customMaterial of this.custom.split(";")) {
+            if (customMaterial.length > 0) {
+                allowableMaterials.push(customMaterial);
+            }
+        }
+
+        if (allowableMaterials.length == 0) {
+            allowableMaterials.push("an inoffensive thing");
+        }
+
+        this.material = allowableMaterials[Math.floor(Math.random() * allowableMaterials.length)];
         if ((this.durationChoice === 'Short') || (this.durationChoice === 'Any' && Math.random() < 0.4)) {
             this.duration = this.shortDurationList[Math.floor(Math.random() * this.shortDurationList.length)];
         }
-        else if ((this.durationChoice === 'Long') || (this.durationChoice === 'Any' && Math.random() < 0.4)){
+        else if ((this.durationChoice === 'Long') || (this.durationChoice === 'Any' && Math.random() < 0.4)) {
             this.duration = this.longDurationList[Math.floor(Math.random() * this.longDurationList.length)];
         }
-        else if ((this.durationChoice === 'Extended') || (this.durationChoice === 'Any' && Math.random() < 0.4)){
+        else if ((this.durationChoice === 'Extended') || (this.durationChoice === 'Any' && Math.random() < 0.4)) {
             this.duration = this.extendedDurationList[Math.floor(Math.random() * this.extendedDurationList.length)];
         }
-        else{
+        else {
             this.duration = this.protractedDurationList[Math.floor(Math.random() * this.protractedDurationList.length)];
-        }        
+        }
 
         this.showBanner = false;
         window.setTimeout(() => this.showBanner = true, 1000);
@@ -191,6 +233,8 @@ export class FateDisplayComponent implements OnInit {
         this._storageService.store("expressionChance", this.expressionChance);
         this._storageService.store("poseChance", this.poseChance);
         this._storageService.store("maxArticles", this.maxArticles);
+        this._storageService.store("blacklist", this.maxArticles);
+        this._storageService.store("custom", this.maxArticles);
     }
 
     descriptionToProbability(desc: string): number {
