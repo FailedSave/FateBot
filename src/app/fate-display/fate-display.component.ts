@@ -233,8 +233,8 @@ export class FateDisplayComponent implements OnInit {
         this._storageService.store("expressionChance", this.expressionChance);
         this._storageService.store("poseChance", this.poseChance);
         this._storageService.store("maxArticles", this.maxArticles);
-        this._storageService.store("blacklist", this.maxArticles);
-        this._storageService.store("custom", this.maxArticles);
+        this._storageService.store("blacklist", this.blacklist);
+        this._storageService.store("custom", this.custom);
     }
 
     descriptionToProbability(desc: string): number {
