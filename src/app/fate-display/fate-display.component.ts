@@ -88,7 +88,8 @@ export class FateDisplayComponent implements OnInit {
         "giving a friendly greeting",
         "with a gesture of triumph",
         "with your hands held up in a gesture of surrender",
-        "beckoning playfully"
+        "beckoning playfully",
+        "as if running, mid-stride"
     ]
 
     expressionList = ["the transformation is quick, and leaves you with a startled expression",
@@ -184,10 +185,17 @@ export class FateDisplayComponent implements OnInit {
         this.expressionDescription = this.expressionList[Math.floor(Math.random() * this.expressionList.length)];
         var possibleMaterials: string[] = this.materialsList;
         var allowableMaterials: string[] = [];
-        var blacklistItems: string[] = this.blacklist.split(";");
+        var blacklistItems: string[];
+        if (this.blacklist.search(",") >= 0) {
+            blacklistItems = this.blacklist.split(",");
+        }
+        else {
+            blacklistItems = this.blacklist.split(";");
+        }
         for (let material of possibleMaterials) {
             var blacklisted: boolean = false;
             for (let blacklistItem of blacklistItems) {
+                blacklistItem.trim();
                 if (blacklistItem.length == 0) {
                     break;
                 }
