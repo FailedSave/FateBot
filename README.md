@@ -12,6 +12,10 @@ The custom choices list is added to the list of potential materials. It's likewi
 
 # Changelog
 
+## 11/23/2018
+
+* Improved layout
+
 ## 11/22/2018
 
 * Link to changelog in footer

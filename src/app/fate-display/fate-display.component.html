@@ -1,19 +1,20 @@
-<p>Name: <input [(ngModel)]="name"></p>
-<p>Duration: <select [(ngModel)]="durationChoice">
+<table class="table">
+<tr><td>Name:</td><td><input [(ngModel)]="name"></td></tr>
+<tr><td>Duration:</td><td><select [(ngModel)]="durationChoice">
         <option>Short</option>
         <option>Long</option>
         <option>Extended</option>
         <option>Protracted</option>
         <option>Any</option>
-    </select></p>
-<p>Chance of Permanence: <select [(ngModel)]="permanenceChance">
+    </select></td></tr>
+    <tr><td>Chance of Permanence:</td><td><select [(ngModel)]="permanenceChance">
         <option>None</option>
         <option>Low</option>
         <option>Medium</option>
         <option>High</option>
         <option>Certain</option>
-    </select></p>
-<p>Chance of Stripping: <select [(ngModel)]="stripChance">
+    </select></td></tr>
+    <tr><td>Chance of Stripping:</td><td><select [(ngModel)]="stripChance">
         <option>None</option>
         <option>Low</option>
         <option>Medium</option>
@@ -27,23 +28,24 @@
         <option>3</option>
         <option>4</option>
         <option>5</option>
-    </select></p>
-<p>Chance of Expression: <select [(ngModel)]="expressionChance">
+    </select></td></tr>
+    <tr><td>Chance of Expression:</td><td><select [(ngModel)]="expressionChance">
         <option>None</option>
         <option>Low</option>
         <option>Medium</option>
         <option>High</option>
         <option>Certain</option>
-    </select></p>
-<p>Chance of Pose: <select [(ngModel)]="poseChance">
+    </select></td></tr>
+    <tr><td>Chance of Pose:</td><td><select [(ngModel)]="poseChance">
         <option>None</option>
         <option>Low</option>
         <option>Medium</option>
         <option>High</option>
         <option>Certain</option>
-    </select></p>
-<p>Blacklist: <input [(ngModel)]="blacklist"></p>
-<p>Custom Choices: <input [(ngModel)]="custom"></p>
+    </select></td></tr>
+    <tr><td>Blacklist:</td><td><input [(ngModel)]="blacklist"></td></tr>
+        <tr><td>Custom Choices: </td><td><input [(ngModel)]="custom"></td></tr>
+</table>
 <p><a class="button" (click)='getFate()'>Submit to Fate</a></p>
 <br />
 <br />
