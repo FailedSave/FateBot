@@ -46,7 +46,11 @@ export class FateDisplayComponent implements OnInit {
     blacklist: string = "";
     custom: string = "";
 
-
+    fadeStripped: string = "hide";
+    fadeMaterial: string = "hide";
+    fadeExpression: string = "hide";
+    fadePose: string = "hide";
+    fadeDuration: string = "hide";
 
     shortDurationList: string[] = ["1 minute", "2 minutes", "5 minutes", "5 minutes", "10 minutes", "10 minutes", "15 minutes", "15 minutes", "20 minutes", "30 minutes"];
     longDurationList: string[] = ["30 minutes", "45 minutes", "1 hour", "1 hour", "90 minutes", "2 hours", "2 hours", "4 hours", "6 hours", "12 hours", "24 hours"];
@@ -224,7 +228,29 @@ export class FateDisplayComponent implements OnInit {
         this.showBanner = false;
         window.setTimeout(() => this.showBanner = true, 1000);
         this.fateState = "hide";
-        window.setTimeout(() => this.fateState = "show", 3000);
+        this.fadeStripped = "hide";
+        this.fadeMaterial = "hide";
+        this.fadeExpression = "hide";
+        this.fadePose = "hide";
+        this.fadeDuration = "hide";
+        var runningTimeout: number = 2000;
+        var increment: number = 1250;
+        if (this.stripped) {
+            window.setTimeout(() => this.fadeStripped = "show", runningTimeout);
+            runningTimeout += increment;
+        }
+        window.setTimeout(() => this.fadeMaterial = "show", runningTimeout);
+        runningTimeout += increment;
+        if (this.expression) {
+            window.setTimeout(() => this.fadeExpression = "show", runningTimeout);
+            runningTimeout += increment;
+        }
+        if (this.posed) {
+            window.setTimeout(() => this.fadePose = "show", runningTimeout);
+            runningTimeout += increment;
+        }
+        window.setTimeout(() => this.fadeDuration = "show", runningTimeout);
+
 
         this._storageService.store("name", this.name);
         this._storageService.store("durationChoice", this.durationChoice);

@@ -76,14 +76,14 @@
 <div *ngIf='showBanner'>
     <p><strong>{{name}}</strong>, your fate is...</p>
 </div>
-<div [@fateState]="fateState">
-    <div *ngIf='stripped'>You will be stripped <strong>{{stripDescription}}</strong>...</div>
-    <p>You will be transformed into <strong>{{material}}</strong>...</p>
-    <div *ngIf='expression'>...{{expressionDescription}}...</div>
-    <div *ngIf='posed'>...you are posed {{poseDescription}}...</div>
+<div>
+    <div [@fateState]="fadeStripped" *ngIf='stripped'>You will be stripped <strong>{{stripDescription}}</strong>...</div>
+    <div [@fateState]="fadeMaterial"><p>You will be transformed into <strong>{{material}}</strong>...</p></div>
+    <div [@fateState]="fadeExpression" *ngIf='expression'>...{{expressionDescription}}...</div>
+    <div [@fateState]="fadePose" *ngIf='posed'>...you are posed {{poseDescription}}...</div>
 
-    <p>...you will stay that way <span *ngIf='permanent'><strong>permanently!</strong></span><span *ngIf='!permanent'>for
-            the next <strong>{{duration}}</strong>.</span></p>
+    <div [@fateState]="fadeDuration"> <p>...you will stay that way <span *ngIf='permanent'><strong>permanently!</strong></span><span *ngIf='!permanent'>for
+            the next <strong>{{duration}}</strong>.</span></p> </div>
 </div>
 <footer class="footer">
     <div class="content has-text-centered">

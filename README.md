@@ -15,6 +15,7 @@ The custom choices list is added to the list of potential materials. It's likewi
 ## 11/23/2018
 
 * Improved layout
+* Fate now fades in a line at a time
 
 ## 11/22/2018
 
