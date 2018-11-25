@@ -12,6 +12,11 @@ The custom choices list is added to the list of potential materials. It's likewi
 
 # Changelog
 
+## 11/25/2018
+
+* Added a new "minimal" permanence chance
+* More poses
+
 ## 11/24/2018
 
 * One new pose
@@ -41,6 +46,13 @@ The custom choices list is added to the list of potential materials. It's likewi
 
 * Initial iteration
 
+# Features planned or being considered
+
+* Non-transformation freeze
+* Encasement
+* Favicon
+* Gender of subject
+* Mindless/aware state
 
 
 

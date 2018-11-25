@@ -63,7 +63,8 @@ export class FateDisplayComponent implements OnInit {
         "a small toy doll", "a copper statue", "a gleaming chrome statue", "a tree", "a wooden statue", "a ball-jointed toy doll",
         "a tiny ceramic figure", "a crystal statue", "an amethyst statue", "a glittering diamond statue", "a steel statue", "a life-sized porcelain figure",
         "a sapphire statue", "a ruby statue", "an emerald statue", "a marionette", "a life-sized plush toy", "a polished jade statue", "a small plush toy",
-        "a pearl statue", "a sand sculpture", "a life-sized cardboard standee", "a poster", "a playing card", "a realistic silicone sex doll", "an inflatable sex doll"];
+        "a chocolate statue", "a wind-up doll", "a humanoid robot", "an obsidian statue",
+        "a pearl statue", "a sand sculpture", "a life-sized cardboard standee", "a life-sized poster", "a playing card", "a realistic silicone sex doll", "an inflatable sex doll"];
 
     poseList = ["standing expectantly with your hands clasped",
         "kneeling submissively",
@@ -79,6 +80,7 @@ export class FateDisplayComponent implements OnInit {
         "as if leaning against a wall",
         "sitting with your feet propped up",
         "lying on your stomach",
+        "lying on your back",
         "in a fighting posture",
         "as if preparing for combat",
         "balancing on one leg and holding the other in your hand",
@@ -89,7 +91,10 @@ export class FateDisplayComponent implements OnInit {
         "with a gesture of triumph",
         "with your hands held up in a gesture of surrender",
         "beckoning playfully",
-        "as if running, mid-stride"
+        "trying but failing to cover yourself modestly",
+        "as if running, mid-stride",
+        "standing with your head turned to look behind you",
+        "kneeling and twisting to look behind you"
     ]
 
     expressionList = ["the transformation is quick, and leaves you with a startled expression",
@@ -106,7 +111,8 @@ export class FateDisplayComponent implements OnInit {
         "the transformation feels better than you had anticipated as is progresses, leaving you with an expression of eager anticipation",
         "you feel defiant, but the transformation freezes your determined face before you can act",
         "you try to protest, but are frozen just as you open your mouth to speak",
-        "you aren't prepared for the strength of the change, and end up with a scared expression"
+        "you aren't prepared for the strength of the change, and end up with a scared expression",
+        "you feel playful, and give a flirtatious smile as you transform"
 
     ]
 
@@ -275,6 +281,8 @@ export class FateDisplayComponent implements OnInit {
         switch (desc) {
             case 'None':
                 return 0;
+            case 'Minimal':
+                return 0.05;
             case 'Low':
                 return 0.2;
             case 'Medium':
