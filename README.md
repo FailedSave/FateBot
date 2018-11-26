@@ -15,7 +15,7 @@ The custom choices list is added to the list of potential materials. It's likewi
 ## 11/25/2018
 
 * Added a new "minimal" permanence chance
-* More poses
+* More poses and expressions
 
 ## 11/24/2018
 
@@ -53,6 +53,7 @@ The custom choices list is added to the list of potential materials. It's likewi
 * Favicon
 * Gender of subject
 * Mindless/aware state
+*
 
 
 

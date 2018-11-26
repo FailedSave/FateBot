@@ -94,6 +94,8 @@ export class FateDisplayComponent implements OnInit {
         "trying but failing to cover yourself modestly",
         "as if running, mid-stride",
         "standing with your head turned to look behind you",
+        "crouched as if poised for action",
+        "standing with your hands behind your back",
         "kneeling and twisting to look behind you"
     ]
 
@@ -112,7 +114,8 @@ export class FateDisplayComponent implements OnInit {
         "you feel defiant, but the transformation freezes your determined face before you can act",
         "you try to protest, but are frozen just as you open your mouth to speak",
         "you aren't prepared for the strength of the change, and end up with a scared expression",
-        "you feel playful, and give a flirtatious smile as you transform"
+        "you feel playful, and give a flirtatious smile as you transform",
+        "the transformation is instantaneous, leaving you frozen midmotion"
 
     ]
 
