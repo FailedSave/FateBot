@@ -116,7 +116,6 @@ export class FateDisplayComponent implements OnInit {
         "you aren't prepared for the strength of the change, and end up with a scared expression",
         "you feel playful, and give a flirtatious smile as you transform",
         "the transformation is instantaneous, leaving you frozen midmotion"
-
     ]
 
     ngOnInit() {
