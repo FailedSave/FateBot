@@ -52,8 +52,6 @@ The custom choices list is added to the list of potential materials. It's likewi
 
 # Features planned or being considered
 
-
-* Favicon
 * Gender of subject
 * Mindless/aware state
 
