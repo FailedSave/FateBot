@@ -15,6 +15,7 @@ The custom choices list is added to the list of potential materials. It's likewi
 ## 11/29/2018
 
 * Added freezes and encasements
+* New favicon--thank lX!
 
 ## 11/25/2018
 
