@@ -12,6 +12,10 @@ The custom choices list is added to the list of potential materials. It's likewi
 
 # Changelog
 
+## 11/29/2018
+
+* Added freezes and encasements
+
 ## 11/25/2018
 
 * Added a new "minimal" permanence chance

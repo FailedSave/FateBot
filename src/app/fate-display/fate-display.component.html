@@ -63,6 +63,21 @@
             </select></td>
     </tr>
     <tr>
+        <td>Effect Types:</td>
+        <td><label class="checkbox">
+                <input type="checkbox" [(ngModel)]="transformationAllowed">
+                Transformation
+            </label> <br />
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="freezeAllowed">
+                Freeze
+            </label><br />
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="encasementAllowed">
+                Encasement
+            </label></td>
+    </tr>
+    <tr>
         <td>Blacklist:</td>
         <td><input [(ngModel)]="blacklist"></td>
     </tr>
@@ -79,12 +94,24 @@
 </div>
 <div>
     <div [@fateState]="fadeStripped" *ngIf='stripped'>You will be stripped <strong>{{stripDescription}}</strong>...</div>
-    <div [@fateState]="fadeMaterial"><p>You will be transformed into <strong>{{material}}</strong>...</p></div>
+    <div [@fateState]="fadeMaterial">
+        <div *ngIf='effectType==0'>
+            <p>You will be transformed into <strong>{{material}}</strong>...</p>
+        </div>
+        <div *ngIf='effectType==1'>
+            <p>You will be <strong>{{material}}</strong>...</p>
+        </div>
+        <div *ngIf='effectType==2'>
+            <p>You will be encased in <strong>{{material}}</strong>...</p>
+        </div>
+    </div>
     <div [@fateState]="fadeExpression" *ngIf='expression'>...{{expressionDescription}}...</div>
     <div [@fateState]="fadePose" *ngIf='posed'>...you are posed {{poseDescription}}...</div>
 
-    <div [@fateState]="fadeDuration"> <p>...you will stay that way <span *ngIf='permanent'><strong>permanently!</strong></span><span *ngIf='!permanent'>for
-            the next <strong>{{duration}}</strong>.</span></p> </div>
+    <div [@fateState]="fadeDuration">
+        <p>...you will stay that way <span *ngIf='permanent'><strong>permanently!</strong></span><span *ngIf='!permanent'>for
+                the next <strong>{{duration}}</strong>.</span></p>
+    </div>
 </div>
 <footer class="footer">
     <div class="content has-text-centered">
