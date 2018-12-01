@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../storage/storage.service';
 import { AnimationEvent, trigger, state, style, animate, transition, sequence } from '@angular/animations';
 import { effectType } from './effect-type';
+import { PoseService } from '../services/pose.service';
+import { ExpressionService } from '../services/expression.service';
 
 @Component({
     selector: 'fb-fate-display',
@@ -21,7 +23,7 @@ import { effectType } from './effect-type';
 })
 export class FateDisplayComponent implements OnInit {
 
-    constructor(private _storageService: StorageService) {
+    constructor(private _storageService: StorageService, private _poseService: PoseService, private _expressionService: ExpressionService) {
 
     }
 
@@ -79,99 +81,6 @@ export class FateDisplayComponent implements OnInit {
     "an enormous emerald", "a layer of solid epoxy", "a solid block of glass", "a close-fitting sheet of steel", "a coat of unnaturally hard mud",
     "an enormous popsicle", "mysteriously animated water"];
 
-    poseList = ["standing expectantly with your hands clasped",
-        "kneeling submissively",
-        "down on one knee",
-        "sitting cross-legged",
-        "sitting on a stool",
-        "with your arms stretched up in the air",
-        "standing at attention",
-        "in a relaxed standing posture",
-        "down on all fours",
-        "standing on a pedestal",
-        "with one leg up on a pedestal",
-        "as if leaning against a wall",
-        "sitting with your feet propped up",
-        "lying on your stomach",
-        "lying on your back",
-        "in a fighting posture",
-        "as if preparing for combat",
-        "balancing on one leg and holding the other in your hand",
-        "hands clasped pleadingly",
-        "as if getting undressed",
-        "touching yourself intimately",
-        "giving a friendly greeting",
-        "with a gesture of triumph",
-        "with your hands held up in a gesture of surrender",
-        "beckoning playfully",
-        "trying but failing to cover yourself modestly",
-        "as if running, mid-stride",
-        "standing with your head turned to look behind you",
-        "crouched as if poised for action",
-        "standing with your hands behind your back",
-        "kneeling and twisting to look behind you",
-        "sitting casually with your legs curled under you",
-        "with your arms up as if to fend off a blow",
-        "in a walking pose, mid-stride",
-        "as if grasping for something out of reach"
-    ]
-
-    transformExpressionList = ["the transformation is quick, and leaves you with a startled expression",
-        "the transformation hits hard and suddenly, leaving you with a stunned expression",
-        "the transformation feels blissful, leaving you in an expression of ecstasy",
-        "the transformation is slow and arousing, freezing you in a moment of unfulfilled lust",
-        "the transformation forces your face into a broad, friendly smile",
-        "you feel numb, and your expression is left entirely blank",
-        "you barely feel yourself transforming, and your expression is neutral",
-        "the transformation feels odd and surprising, leaving you with a confused expression",
-        "the transformation washes over you in a cold, unexpected wave, leaving you with a terrified expression",
-        "the transformation feels deeply natural, and leaves you with an expression of tranquil acceptance",
-        "somehow, your mind wanders away during the transformation, and your expression seems lost in thought",
-        "the transformation feels better than you had anticipated as it progresses, leaving you with an expression of eager anticipation",
-        "you feel defiant, but the transformation freezes your determined face before you can act",
-        "you try to protest, but are frozen just as you open your mouth to speak",
-        "you aren't prepared for the strength of the change, and end up with a scared expression",
-        "you feel playful, and give a flirtatious smile as you transform",
-        "the transformation is instantaneous, leaving you frozen midmotion"
-    ]
-
-    freezeExpressionList = ["you are frozen quickly, and left with a startled expression",
-        "you are frozen suddenly, leaving you with a stunned expression",
-        "the freeze feels blissful, leaving you in an expression of ecstasy",
-        "the process is slow and arousing, freezing you in a moment of unfulfilled lust",
-        "as you are frozen you face is forced into a broad, friendly smile",
-        "you feel numb, and your expression is left entirely blank",
-        "you barely feel yourself freezing, and your expression is neutral",
-        "the process feels odd and surprising, leaving you with a confused expression",
-        "the process washes over you in a cold, unexpected wave, leaving you with a terrified expression",
-        "the experience feels deeply natural, and leaves you with an expression of tranquil acceptance",
-        "somehow, your mind wanders away as you are frozen, and your expression seems lost in thought",
-        "the experience feels better than you had anticipated as it progresses, leaving you with an expression of eager anticipation",
-        "you feel defiant, but your determined face is frozen before you can act",
-        "you try to protest, but are frozen just as you open your mouth to speak",
-        "you aren't prepared for the strength of the process, and end up with a scared expression",
-        "you feel playful, and give a flirtatious smile as you freeze",
-        "you are frozen instantaneously, leaving you frozen midmotion"
-    ]
-
-    encasementExpressionList = ["the encasement is quick, and leaves you with a startled expression",
-        "the encasement hits hard and suddenly, leaving you with a stunned expression",
-        "the encasement feels blissful, leaving you in an expression of ecstasy",
-        "the encasement is slow and arousing, freezing you in a moment of unfulfilled lust",
-        "as you are encased you face is forced into a broad, friendly smile",
-        "you feel numb, and your expression is left entirely blank",
-        "you barely feel yourself being encased, and your expression is neutral",
-        "the encasement feels odd and surprising, leaving you with a confused expression",
-        "the encasement washes over you in a cold, unexpected wave, leaving you with a terrified expression",
-        "the encasement feels deeply natural, and leaves you with an expression of tranquil acceptance",
-        "somehow, your mind wanders away during the encasement, and your expression seems lost in thought",
-        "the encasement feels better than you had anticipated as it progresses, leaving you with an expression of eager anticipation",
-        "you feel defiant, but the encasement overwhelms your determined face before you can act",
-        "you try to protest, but are frozen just as you open your mouth to speak",
-        "you aren't prepared for the quickness of the encasement, and end up with a scared expression",
-        "you feel playful, and give a flirtatious smile as you are encased",
-        "the encasement is instantaneous, leaving you frozen midmotion"
-    ]
     ngOnInit() {
         if (this._storageService.retrieve("name")) {
             this.name = this._storageService.retrieve("name");
@@ -265,9 +174,9 @@ export class FateDisplayComponent implements OnInit {
         else {
             this.stripDescription = "down to " + this.articles + " articles of clothing"
         }
-        this.poseDescription = this.poseList[Math.floor(Math.random() * this.poseList.length)];
+        this.poseDescription = this._poseService.getRandomPose();
         this.effectType = this.getEffectType();
-        this.expressionDescription = this.getExpression(this.effectType); 
+        this.expressionDescription = this._expressionService.getExpression(this.effectType); 
         var possibleMaterials: string[];
         switch (this.effectType) {
             case effectType.transformation:
@@ -388,26 +297,6 @@ export class FateDisplayComponent implements OnInit {
             return effectType.transformation;
         }
         return possibleTypes[Math.floor(Math.random() * possibleTypes.length)];
-    }
-
-    getExpression(type: effectType): string {
-        var possibleExpressions: string[];
-        switch (type) {
-            case effectType.transformation:
-            possibleExpressions = this.transformExpressionList;
-                break;
-            case effectType.freeze:
-            possibleExpressions = this.freezeExpressionList;
-                break;
-            case effectType.encasement:
-            possibleExpressions = this.encasementExpressionList;
-                break;
-            default:
-            possibleExpressions = ["error: bad effect type"];
-                break;
-        }
-
-        return possibleExpressions[Math.floor(Math.random() * possibleExpressions.length)];
     }
 
     descriptionToProbability(desc: string): number {
