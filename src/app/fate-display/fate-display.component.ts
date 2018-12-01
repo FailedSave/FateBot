@@ -68,7 +68,7 @@ export class FateDisplayComponent implements OnInit {
         "a small toy doll", "a copper statue", "a gleaming chrome statue", "a tree", "a wooden statue", "a ball-jointed toy doll",
         "a tiny ceramic figure", "a crystal statue", "an amethyst statue", "a glittering diamond statue", "a steel statue", "a life-sized porcelain figure",
         "a sapphire statue", "a ruby statue", "an emerald statue", "a marionette", "a life-sized plush toy", "a polished jade statue", "a small plush toy",
-        "a chocolate statue", "a wind-up doll", "a humanoid robot", "an obsidian statue", "a mural on the wall",
+        "a chocolate statue", "a wind-up doll", "a humanoid robot", "an obsidian statue", "a mural on the wall", "a plastic anime figurine",
         "a pearl statue", "a sand sculpture", "a life-sized cardboard standee", "a life-sized poster", "a playing card", "a realistic silicone sex doll", "an inflatable sex doll"];
 
     freezeMaterialsList: string[] = ["frozen in time", "immobilized, aware but unable to move at all", "frozen solid", "frozen and vitrified on a cursed plate", "paralyzed, your muscles useless"]
@@ -109,7 +109,11 @@ export class FateDisplayComponent implements OnInit {
         "standing with your head turned to look behind you",
         "crouched as if poised for action",
         "standing with your hands behind your back",
-        "kneeling and twisting to look behind you"
+        "kneeling and twisting to look behind you",
+        "sitting casually with your legs curled under you",
+        "with your arms up as if to fend off a blow",
+        "in a walking pose, mid-stride",
+        "as if grasping for something out of reach"
     ]
 
     transformExpressionList = ["the transformation is quick, and leaves you with a startled expression",
