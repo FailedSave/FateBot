@@ -12,10 +12,16 @@ The custom choices list is added to the list of potential materials. It's likewi
 
 # Changelog
 
+## 12/1/2018
+
+* Minor pose/expression additions
+* Bug fix with parsing of custom items
+* Code cleanup + refactoring
+
 ## 11/29/2018
 
 * Added freezes and encasements
-* New favicon--thank lX!
+* New favicon--thanks lX!
 
 ## 11/25/2018
 

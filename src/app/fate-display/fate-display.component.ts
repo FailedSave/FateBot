@@ -4,6 +4,7 @@ import { AnimationEvent, trigger, state, style, animate, transition, sequence } 
 import { effectType } from './effect-type';
 import { PoseService } from '../services/pose.service';
 import { ExpressionService } from '../services/expression.service';
+import { MaterialService } from '../services/material.service';
 
 @Component({
     selector: 'fb-fate-display',
@@ -23,7 +24,8 @@ import { ExpressionService } from '../services/expression.service';
 })
 export class FateDisplayComponent implements OnInit {
 
-    constructor(private _storageService: StorageService, private _poseService: PoseService, private _expressionService: ExpressionService) {
+    constructor(private _storageService: StorageService, private _poseService: PoseService, private _expressionService: ExpressionService,
+        private _materialService: MaterialService) {
 
     }
 
@@ -63,23 +65,6 @@ export class FateDisplayComponent implements OnInit {
     longDurationList: string[] = ["30 minutes", "45 minutes", "1 hour", "1 hour", "90 minutes", "2 hours", "2 hours", "4 hours", "6 hours", "12 hours", "24 hours"];
     extendedDurationList: string[] = ["1 day", "2 days", "5 days", "1 week", "1 week", "2 weeks", "2 weeks", "3 weeks", "1 month", "2 months"];
     protractedDurationList: string[] = ["1 month", "2 months", "3 months", "6 months", "9 months", "1 year", "1 year", "2 years", "2 years", "5 years", "10 years", "50 years"];
-
-
-    transformMaterialsList: string[] = ["a stone statue", "a marble statue", "a polished granite statue", "a golden statue",
-        "a silver statue", "a brass statue", "a bronze statue", "a glass statue", "an ice sculpture", "a mannequin",
-        "a small toy doll", "a copper statue", "a gleaming chrome statue", "a tree", "a wooden statue", "a ball-jointed toy doll",
-        "a tiny ceramic figure", "a crystal statue", "an amethyst statue", "a glittering diamond statue", "a steel statue", "a life-sized porcelain figure",
-        "a sapphire statue", "a ruby statue", "an emerald statue", "a marionette", "a life-sized plush toy", "a polished jade statue", "a small plush toy",
-        "a chocolate statue", "a wind-up doll", "a humanoid robot", "an obsidian statue", "a mural on the wall", "a plastic anime figurine",
-        "a pearl statue", "a sand sculpture", "a life-sized cardboard standee", "a life-sized poster", "a playing card", "a realistic silicone sex doll", "an inflatable sex doll"];
-
-    freezeMaterialsList: string[] = ["frozen in time", "immobilized, aware but unable to move at all", "frozen solid", "frozen and vitrified on a cursed plate", "paralyzed, your muscles useless"]
-
-    encasementMaterialsList: string[] = ["a slab of carbonite", "a sheet of ice", "a large block of ice", "a chocolate shell", "a coat of plaster",
-    "a coat of concrete", "quick-hardening clear plastic", "a block of clear resin", "a large, gleaming crystal", "a solid blob of amber",
-    "a clear, solid coat of lacquer", "a hard wax shell", "a hard gelatin shell", "a huge, clear blue sapphire", "a huge, gleaming red ruby",
-    "an enormous emerald", "a layer of solid epoxy", "a solid block of glass", "a close-fitting sheet of steel", "a coat of unnaturally hard mud",
-    "an enormous popsicle", "mysteriously animated water"];
 
     ngOnInit() {
         if (this._storageService.retrieve("name")) {
@@ -177,22 +162,7 @@ export class FateDisplayComponent implements OnInit {
         this.poseDescription = this._poseService.getRandomPose();
         this.effectType = this.getEffectType();
         this.expressionDescription = this._expressionService.getExpression(this.effectType); 
-        var possibleMaterials: string[];
-        switch (this.effectType) {
-            case effectType.transformation:
-                possibleMaterials = this.transformMaterialsList;
-                break;
-            case effectType.freeze:
-                possibleMaterials = this.freezeMaterialsList;
-                break;
-            case effectType.encasement:
-                possibleMaterials = this.encasementMaterialsList;
-                break;
-            default:
-                possibleMaterials = ["error: bad effect type"];
-                break;
-        }
-        var allowableMaterials: string[] = [];
+
         var blacklistItems: string[];
         if (this.blacklist.search(",") >= 0) {
             blacklistItems = this.blacklist.split(",");
@@ -200,34 +170,16 @@ export class FateDisplayComponent implements OnInit {
         else {
             blacklistItems = this.blacklist.split(";");
         }
-        for (let material of possibleMaterials) {
-            var blacklisted: boolean = false;
-            for (let blacklistItem of blacklistItems) {
-                blacklistItem.trim();
-                if (blacklistItem.length == 0) {
-                    break;
-                }
-                if (material.search(blacklistItem) >= 0) {
-                    blacklisted = true;
-                    break;
-                }
-            }
-            if (!blacklisted) {
-                allowableMaterials.push(material);
-            }
+
+        var customItems: string[];
+        if (this.custom.search(",") >= 0) {
+            customItems = this.custom.split(",");
+        }
+        else {
+            customItems = this.custom.split(";");
         }
 
-        for (let customMaterial of this.custom.split(";")) {
-            if (customMaterial.length > 0) {
-                allowableMaterials.push(customMaterial);
-            }
-        }
-
-        if (allowableMaterials.length == 0) {
-            allowableMaterials.push("an inoffensive thing");
-        }
-
-        this.material = allowableMaterials[Math.floor(Math.random() * allowableMaterials.length)];
+        this.material = this._materialService.getMaterial(this.effectType, blacklistItems, customItems);
         if ((this.durationChoice === 'Short') || (this.durationChoice === 'Any' && Math.random() < 0.4)) {
             this.duration = this.shortDurationList[Math.floor(Math.random() * this.shortDurationList.length)];
         }
