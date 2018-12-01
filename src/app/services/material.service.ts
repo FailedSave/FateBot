@@ -60,6 +60,7 @@ export class MaterialService {
         }
         
         for (let customMaterial of customMaterials) {
+            customMaterial.trim();
             if (customMaterial.length > 0) {
                 allowableMaterials.push(customMaterial);
             }
